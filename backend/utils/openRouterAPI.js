@@ -2,6 +2,8 @@ const axios = require('axios');
 
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
+const APP_URL = process.env.APP_URL || process.env.FRONTEND_URL || 'http://localhost:3000';
+const APP_TITLE = process.env.APP_TITLE || 'Candidate Shortlisting System';
 
 async function getCandidateSuggestions(candidates, jobRequirements) {
   try {
@@ -59,7 +61,7 @@ async function getCandidateSuggestions(candidates, jobRequirements) {
     const response = await axios.post(
       OPENROUTER_URL,
       {
-        model: 'openai/gpt-3.5-turbo',
+        model: 'openai/gpt-oss-120b:free',
         messages: [
           {
             role: 'user',
@@ -73,8 +75,8 @@ async function getCandidateSuggestions(candidates, jobRequirements) {
         headers: {
           'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
           'Content-Type': 'application/json',
-          'HTTP-Referer': 'http://localhost:3000',
-          'X-Title': 'Candidate Shortlisting System'
+          'HTTP-Referer': APP_URL,
+          'X-Title': APP_TITLE
         }
       }
     );
@@ -147,7 +149,7 @@ async function generateInterviewQuestions(candidate, jobRequirements) {
     const response = await axios.post(
       OPENROUTER_URL,
       {
-        model: 'openai/gpt-3.5-turbo',
+        model: 'openai/gpt-oss-120b:free',
         messages: [
           {
             role: 'user',
@@ -161,8 +163,8 @@ async function generateInterviewQuestions(candidate, jobRequirements) {
         headers: {
           'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
           'Content-Type': 'application/json',
-          'HTTP-Referer': 'http://localhost:3000',
-          'X-Title': 'Candidate Shortlisting System'
+          'HTTP-Referer': APP_URL,
+          'X-Title': APP_TITLE
         }
       }
     );

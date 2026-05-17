@@ -56,7 +56,10 @@ function CandidateForm({ onSuccess }) {
         if (onSuccess) onSuccess();
       }
     } catch (error) {
-      setMessage(error.response?.data?.message || 'Error adding candidate');
+      setMessage(
+        error.response?.data?.message ||
+        (error.request ? 'Unable to reach backend. Check API URL and CORS settings.' : 'Error adding candidate')
+      );
     } finally {
       setLoading(false);
     }

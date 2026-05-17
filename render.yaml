@@ -10,6 +10,12 @@ services:
         sync: false
       - key: OPENROUTER_API_KEY
         sync: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: APP_URL
+        sync: false
+      - key: APP_TITLE
+        value: Candidate Shortlisting System
       - key: PORT
         value: "5000"
       - key: NODE_ENV
